@@ -1,5 +1,5 @@
-import { Token } from 'src/auth/domain/model/AuthModel';
-import { AuthRepository } from '../../../domain/model/repository/AuthRepository'
+import { Token } from 'src/domain/model/data/AuthModel';
+import { AuthRepository } from '../../../domain/model/data/repository/AuthRepository'
 
 export class AuthFirebaseRepository implements AuthRepository {
     async loginWithEmailAndPassWord(email: string, password: string) {
