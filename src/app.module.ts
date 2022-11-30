@@ -3,12 +3,8 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
-import { EnvironmentConfigModule } from './infrastructure/config/environment-config/environment-config.module';
-import { SequelizeConfigModule } from './infrastructure/config/sequelize/sequelize.module';
-import { LoggerModule } from './infrastructure/logger/logger.module';
-import { ExceptionsModule } from './infrastructure/exceptions/exceptions.module';
-import { AuthorResolver } from './author/author.resolver';
-import { AuthorService } from './author/author.service';
+import { AuthModule } from './auth/auth.module';
+import { CommonModule } from './common/common.module';
 
 @Module({
   imports: [
@@ -16,18 +12,14 @@ import { AuthorService } from './author/author.service';
       driver: ApolloDriver,
       typePaths: ['./**/*.graphql'],
       definitions: {
-        path: join(process.cwd(), 'src/graphql.ts'),
+        path: join(process.cwd(), 'src/common/application/graphql.ts'),
         outputAs: 'class'
       },
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault],
     }),
-
-    EnvironmentConfigModule,
-    SequelizeConfigModule,
-    LoggerModule,
-    ExceptionsModule,
-  ],
-  providers: [AuthorResolver, AuthorService, AuthorResolver],
+    CommonModule,
+    AuthModule,
+  ]
 })
 export class AppModule {}
