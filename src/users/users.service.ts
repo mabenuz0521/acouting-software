@@ -5,12 +5,12 @@ export class UsersService {
   private readonly users = [
     {
       id: 1,
-      username: 'mateo',
+      email: 'mateo@gmail.com',
       password: 'nadasegura',
     },
     {
       id: 2,
-      username: 'pablo',
+      email: 'danielo@gmail.com',
       password: 'nadasegura',
     },
   ];
@@ -26,8 +26,8 @@ export class UsersService {
     
   }
 
-  findOne(username: string) {
-    return this.users.find((user) => user.username === username);
+  findOne(email: string) {
+    return this.users.find((user) => user.email === email);
   }
 
   findAll() {

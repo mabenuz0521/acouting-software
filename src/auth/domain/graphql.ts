@@ -11,11 +11,11 @@
 export class CreateUserInput {
     id?: Nullable<number>;
     password: string;
-    username: string;
+    email: string;
 }
 
 export class LoginUserInput {
-    username: string;
+    email: string;
     password: string;
 }
 
@@ -41,7 +41,7 @@ export abstract class IQuery {
 export class User {
     id: number;
     password: string;
-    username: string;
+    email: string;
 }
 
 type Nullable<T> = T | null;

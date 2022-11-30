@@ -9,9 +9,12 @@ import { UsersModule } from 'src/users/users.module';
 import { LocalStrategy } from './domain/strategy/auth.local.strategy';
 import { JwtStrategy } from './domain/strategy/jwt.strategy';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
+import { FirebaseService } from './domain/services/firebase/firebase.service';
+import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
     UsersModule,
+    ConfigModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       typePaths: ['./**/*.graphql'],
@@ -27,6 +30,6 @@ import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
       secret: 'hide-me',
     }),
   ],
-  providers: [AuthService, AuthResolver, LocalStrategy, JwtStrategy],
+  providers: [AuthService, AuthResolver, LocalStrategy, JwtStrategy, FirebaseService],
 })
 export class AuthModule {}

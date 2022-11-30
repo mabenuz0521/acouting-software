@@ -1,7 +1,7 @@
 input CreateUserInput {
   id: Int
   password: String!
-  username: String!
+  email: String!
 }
 
 type LoginResponse {
@@ -10,7 +10,7 @@ type LoginResponse {
 }
 
 input LoginUserInput {
-  username: String!
+  email: String!
   password: String!
 }
 
@@ -28,5 +28,5 @@ type Query {
 type User {
   id: Int!
   password: String!
-  username: String!
+  email: String!
 }
