@@ -52,16 +52,6 @@ export class AuthService {
 
   //aquí crearemos el usuario usuando firebase
   async singup(loginUserInput: LoginUserInput) {
-    // const user = await this.usersService.findOne(loginUserInput.email);
-
-    // if (user) {
-    //   throw new Error('User already exists!');
-    // }
-    // const password = await bcrypt.hash(loginUserInput.password, 10);
-    // return this.usersService.create({
-    //   ...loginUserInput,
-    //   password
-    // });
     try {
       const password = await bcrypt.hash(loginUserInput.password, 10);
       const userCredential: UserCredential =
@@ -70,7 +60,6 @@ export class AuthService {
           loginUserInput.email,
           password,
         );
-
       if (userCredential) {
         const id: string = userCredential.user.uid;
         const docRef: DocumentReference = doc(
