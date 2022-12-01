@@ -1,17 +1,10 @@
 import { Module } from '@nestjs/common';
-import { AuthResolver } from './AuthResolver'
-import { AuthUseCases } from '../../domain/usecase/AuthUseCases'
-import { AuthRepository } from '../../domain/model/data/repository/AuthRepository'
-import { AuthFirebaseRepository } from '../drivenAdapters/firebase/AuthFirebaseRepository'
+import { AuthResolver } from './AuthResolver';
+import { AuthUseCases } from '../../domain/usecase/AuthUseCases';
+import { FirebaseModule } from '../drivenAdapters/firebase/firebase.module';
 
 @Module({
-    providers: [
-        {
-            provide: AuthRepository,
-            useClass: AuthFirebaseRepository
-        },
-        AuthUseCases,
-        AuthResolver
-    ]
+  imports: [FirebaseModule],
+  providers: [AuthUseCases, AuthResolver],
 })
 export class ResolversModule {}

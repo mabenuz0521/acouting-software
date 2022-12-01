@@ -7,7 +7,7 @@ export class AuthUseCases {
         private authRepository: AuthRepository
     ) {}
 
-    login(username: string, password: string) {
-        return this.authRepository.loginWithEmailAndPassWord(username, password)
+    login(email: string, password: string) {
+        return this.authRepository.loginWithEmailAndPassWord(email, password)
     }
 }

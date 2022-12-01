@@ -11,10 +11,10 @@ export class AuthResolver {
 
     @Query()
     login(
-        @Args('username') username: string,
+        @Args('email') email: string,
         @Args('password') password: string,
     ) {
-        return this.authUseCases.login(username, password)
+        return this.authUseCases.login(email, password)
     }
 
 }
