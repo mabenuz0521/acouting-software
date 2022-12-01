@@ -10,4 +10,8 @@ export class AuthUseCases {
     login(email: string, password: string) {
         return this.authRepository.loginWithEmailAndPassWord(email, password)
     }
+
+    singup( email:string, password:string){
+        return this.authRepository.singupWithEmailAndPassword(email,password);
+    }
 }

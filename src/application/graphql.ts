@@ -12,8 +12,16 @@ export class Token {
     token?: Nullable<string>;
 }
 
+export class User {
+    id?: Nullable<string>;
+    email?: Nullable<string>;
+    password?: Nullable<string>;
+}
+
 export abstract class IQuery {
     abstract login(email: string, password: string): Nullable<Token> | Promise<Nullable<Token>>;
+
+    abstract singup(email: string, password: string): Nullable<User> | Promise<Nullable<User>>;
 }
 
 type Nullable<T> = T | null;
