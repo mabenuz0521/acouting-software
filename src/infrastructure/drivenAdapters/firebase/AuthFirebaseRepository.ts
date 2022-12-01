@@ -15,18 +15,17 @@ import {
   DocumentSnapshot,
   DocumentData,
 } from 'firebase/firestore';
-import { HttpException, HttpStatus, OnModuleInit } from '@nestjs/common';
-import { ModuleRef } from '@nestjs/core';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
-export class AuthFirebaseRepository implements AuthRepository,OnModuleInit {
-  private firebaseService: FirebaseService;
-  constructor(private moduleRef: ModuleRef) {}
-  onModuleInit() {
-    this.firebaseService = this.moduleRef.get(FirebaseService);
-  }
+@Injectable()
+export class AuthFirebaseRepository implements AuthRepository {
+  
+  
+  constructor(private firebaseService: FirebaseService) {}
+  
   async loginWithEmailAndPassWord(email: string, password: string) {
     try {
-      console.log('Firebase auth: ', this.firebaseService);
+
       const userCredential: UserCredential = await signInWithEmailAndPassword(
         this.firebaseService.auth,
         email,
