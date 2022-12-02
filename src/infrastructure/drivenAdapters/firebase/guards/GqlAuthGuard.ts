@@ -8,5 +8,4 @@ export class GqlAuthGuard extends FirebaseAuthGuard {
         const ctx = GqlExecutionContext.create(context);
         return ctx.getContext().req;
     }
- 
 }
