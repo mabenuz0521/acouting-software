@@ -1,7 +1,6 @@
 import { Token, User } from 'src/domain/model/data/AuthModel';
 import { AuthRepository } from '../../../domain/model/data/repository/AuthRepository';
 import { FirebaseService } from './service/AuthFirebaseService';
-import * as bcrypt from 'bcrypt';
 import {
   AuthError,
   createUserWithEmailAndPassword,
@@ -38,9 +37,14 @@ export class AuthFirebaseRepository implements AuthRepository {
           id,
         );
         const snapShot: DocumentSnapshot<DocumentData> = await getDoc(docRef);
+        const user : User = {
+          id,
+          email,
+          ...snapShot.data()
+        }
         const response: Token = {
-          ...snapShot.data(),
           token,
+          user
         };
         return response;
       }

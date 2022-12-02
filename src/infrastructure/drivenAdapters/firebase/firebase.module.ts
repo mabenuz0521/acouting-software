@@ -9,7 +9,7 @@ import { FirebaseService } from './service/AuthFirebaseService';
       provide: AuthRepository,
       useClass: AuthFirebaseRepository,
     },
-    FirebaseService
+    FirebaseService,
   ],
   exports: [
     {

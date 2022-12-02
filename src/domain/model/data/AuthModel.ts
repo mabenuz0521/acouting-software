@@ -1,5 +1,6 @@
 export interface Token {
   token: string;
+  user: User
 }
 
 export interface User {
