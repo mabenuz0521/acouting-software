@@ -1,9 +1,7 @@
 import { Args, Context, Query, Resolver } from '@nestjs/graphql';
 import { AuthUseCases } from '../../domain/usecase/AuthUseCases';
 import { GqlAuthGuard } from '../drivenAdapters/firebase/guards/GqlAuthGuard';
-import { AuthGuard } from '@nestjs/passport';
-import { Req, UseGuards } from '@nestjs/common';
-import { Request } from 'express';
+import { UseGuards } from '@nestjs/common';
 @Resolver('Auth')
 export class AuthResolver {
   constructor(private authUseCases: AuthUseCases) {}
