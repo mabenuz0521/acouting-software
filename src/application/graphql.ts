@@ -24,6 +24,8 @@ export abstract class IQuery {
 
     abstract singup(email: string, password: string): Nullable<User> | Promise<Nullable<User>>;
 
+    abstract greetings(): string | Promise<string>;
+
     abstract greeting(): string | Promise<string>;
 }
 

@@ -11,7 +11,6 @@ import { ConfigModule } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
 import { FirebaseAuthModule } from 'nestjs-firebase-passport';
 import { AuthStrategy } from './infrastructure/drivenAdapters/firebase/strategy/AuthStrategy';
-import { FirebaseController } from './infrastructure/drivenAdapters/firebase/firebase.controller';
 @Module({
   imports: [
     FirebaseAuthModule.register({
@@ -36,6 +35,5 @@ import { FirebaseController } from './infrastructure/drivenAdapters/firebase/fir
     ResolversModule,
   ],
   providers: [AuthStrategy],
-  controllers: [FirebaseController],
 })
 export class AppModule {}
