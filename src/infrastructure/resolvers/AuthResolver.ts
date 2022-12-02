@@ -2,6 +2,12 @@ import { UseGuards } from '@nestjs/common';
 import { Args, Context, Query, Resolver } from '@nestjs/graphql';
 import { AuthUseCases } from '../../domain/usecase/AuthUseCases';
 import { GqlAuthGuard } from '../drivenAdapters/firebase/guards/GqlAuthGuard';
+import { AuthGuard } from '@nestjs/passport';
+import { User } from 'src/domain/model/data/AuthModel';
+import { FirebaseCustomStrategy } from '../drivenAdapters/firebase/strategy/FirebaseCustomStrategy';
+import { Request } from 'express';
+import { Req } from '@nestjs/common';
+import { Json } from 'sequelize/types/utils';
 @Resolver('Auth')
 export class AuthResolver {
   constructor(private authUseCases: AuthUseCases) {}
@@ -18,7 +24,8 @@ export class AuthResolver {
 
   @Query()
   @UseGuards(GqlAuthGuard)
-  greetings(){
-    return 'Hola mundoooo'
+  greeting(): string{
+    return `holla mundo  `;
   }
+  
 }

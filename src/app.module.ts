@@ -10,11 +10,13 @@ import { ResolversModule } from './infrastructure/resolvers/resolvers.module';
 import { ConfigModule } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
 import { FirebaseAuthModule } from 'nestjs-firebase-passport';
+import { AuthStrategy } from './infrastructure/drivenAdapters/firebase/strategy/AuthStrategy';
+import { FirebaseController } from './infrastructure/drivenAdapters/firebase/firebase.controller';
 @Module({
   imports: [
     FirebaseAuthModule.register({
       audience: process.env.FIREBASE_AUDIENCE,
-      issuer: process.env.FIREBASE_ISSUER
+      issuer: process.env.FIREBASE_ISSUER,
     }),
     PassportModule,
     ConfigModule.forRoot(),
@@ -33,5 +35,7 @@ import { FirebaseAuthModule } from 'nestjs-firebase-passport';
     ExceptionsModule,
     ResolversModule,
   ],
+  providers: [AuthStrategy],
+  controllers: [FirebaseController],
 })
 export class AppModule {}
