@@ -1,4 +1,4 @@
-import { Token, User } from 'src/domain/model/data/AuthModel';
+import { Token , User} from 'src/domain/model/data/AuthModel';
 import { AuthRepository } from '../../../domain/model/data/repository/AuthRepository';
 import { FirebaseService } from './service/AuthFirebaseService';
 import {
@@ -41,6 +41,7 @@ export class AuthFirebaseRepository implements AuthRepository {
           id,
           email,
           ...snapShot.data()
+
         }
         const response: Token = {
           token,

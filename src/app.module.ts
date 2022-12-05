@@ -11,6 +11,8 @@ import { ConfigModule } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
 import { FirebaseAuthModule } from 'nestjs-firebase-passport';
 import { AuthStrategy } from './infrastructure/drivenAdapters/firebase/strategy/AuthStrategy';
+import { SequelizeModule } from '@nestjs/sequelize';
+import { User } from './domain/model/data/UserModel';
 @Module({
   imports: [
     FirebaseAuthModule.register({
@@ -26,8 +28,17 @@ import { AuthStrategy } from './infrastructure/drivenAdapters/firebase/strategy/
         path: join(process.cwd(), 'src/application/graphql.ts'),
         outputAs: 'class',
       },
-      playground: true,
-      //plugins: [ApolloServerPluginLandingPageLocalDefault],
+      playground: false,
+      plugins: [ApolloServerPluginLandingPageLocalDefault],
+    }),
+    SequelizeModule.forRoot({
+      dialect: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: '',
+      database: 'acoutting_software',
+      models: [User],
     }),
     EnvironmentConfigModule,
     LoggerModule,

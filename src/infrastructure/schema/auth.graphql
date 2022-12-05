@@ -3,12 +3,6 @@ type Token {
     user: User
 }
 
-type User {
-    id: String
-    email: String
-    password: String
-}
-
 type Query {
     login(email: String!, password: String!): Token
     singup(email: String!, password: String!): User
