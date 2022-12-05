@@ -27,8 +27,6 @@ export abstract class IQuery {
     abstract greetings(): string | Promise<string>;
 
     abstract greeting(): string | Promise<string>;
-
-    abstract users(): User[] | Promise<User[]>;
 }
 
 type Nullable<T> = T | null;
