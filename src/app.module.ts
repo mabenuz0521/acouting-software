@@ -33,6 +33,9 @@ import { AuthStrategy } from './infrastructure/drivenAdapters/firebase/strategy/
     LoggerModule,
     ExceptionsModule,
     ResolversModule,
+    EnvironmentConfigModule,
+    
+  
   ],
   providers: [AuthStrategy],
 })
