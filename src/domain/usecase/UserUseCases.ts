@@ -1,32 +1,35 @@
 import { Injectable } from '@nestjs/common';
 import { UserDto } from '../model/data/dto/user.dto';
 import { UserRepository } from '../model/data/repository/UserRepository';
+import { IUser } from '../model/data/UserModel';
 
 @Injectable()
 export class UserUseCases {
   constructor(private userRepository: UserRepository) {}
 
   findAll() {
-    return this.userRepository.findAllUser();
+    return this.userRepository.getAll();
   }
 
-  create(user: UserDto) {
-    return this.userRepository.createUser(user);
+  create(user: IUser) {
+    return this.userRepository.create(user);
   }
 
   findUserById(id: string) {
-    return this.userRepository.findUserById(id);
+    return this.userRepository.getById(id);
   }
 
   findUserByEmail(email: string) {
-    return this.userRepository.findUserByEmail(email);
+    return this.userRepository.getByEmail(email);
   }
 
-  updateUser(id: string, user: UserDto) {
-    return this.userRepository.updateUser(id, user);
+  async updateUser(id: string, userParams: Partial<Omit<IUser, 'id'>>) {
+    const user = await this.userRepository.getById(id)
+    
+    return this.userRepository.update(Object.assign(user, userParams));
   }
 
   deleteUser(id: string) {
-    return this.userRepository.deleteUser(id);
+    return this.userRepository.delete(id);
   }
 }

@@ -1,22 +1,21 @@
-type User {
+type UserResponse {
   id: String
   email: String
   password: String
 }
 
-input UserDTO {
+input UserInput {
   id: String
   email: String
   password: String
 }
 
 type Query {
-  users: [User!]!
-  user(id: String!):User!
-  userEmail(email:String!):User!
+  getUsers: [UserResponse!]!
+  getUser(id: String!): UserResponse!
+  getUserByEmail(email: String!): UserResponse!
 }
 
-
-type Mutation{
-  update(id: String!, userdto: UserDTO!):User!
+type Mutation {
+  updateUser(id: String!, userInput: UserInput!): UserResponse!
 }

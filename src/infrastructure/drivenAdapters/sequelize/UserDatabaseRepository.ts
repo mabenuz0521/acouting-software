@@ -1,16 +1,17 @@
 import { Injectable, Inject, HttpStatus, HttpException } from '@nestjs/common';
 import { UserRepository } from 'src/domain/model/data/repository/UserRepository';
 import { USER_REPOSITORY } from 'src/domain/model/config/constans';
-import { User } from 'src/domain/model/data/UserModel';
-import { UserDto } from 'src/domain/model/data/dto/user.dto';
+import { IUser } from 'src/domain/model/data/UserModel';
+import { User } from '../sequelize/entities/UserEntity';
 import * as bcrypt from 'bcrypt';
+
 @Injectable()
 export class UserDatabaseRepository implements UserRepository {
   constructor(
     @Inject(USER_REPOSITORY) private readonly userRepository: typeof User,
   ) {}
 
-  async findUserById(id: string): Promise<User> {
+  async getById(id: string): Promise<IUser> {
     const userFound = await this.userRepository.findOne<User>({
       where: {
         id,
@@ -22,7 +23,8 @@ export class UserDatabaseRepository implements UserRepository {
     }
     return userFound;
   }
-  async findUserByEmail(email: string): Promise<User> {
+  
+  async getByEmail(email: string): Promise<IUser> {
     const userFound = await this.userRepository.findOne<User>({
       where: {
         email,
@@ -35,10 +37,10 @@ export class UserDatabaseRepository implements UserRepository {
     return userFound;
   }
 
-  async updateUser(id: string, user: UserDto): Promise<User> {
+  async update(user: IUser): Promise<IUser> {
     const userFound = await this.userRepository.findOne<User>({
       where: {
-        id,
+        id: user.id,
       },
     });
     if (!userFound) {
@@ -54,17 +56,16 @@ export class UserDatabaseRepository implements UserRepository {
     }
   }
 
-  async deleteUser(id: string): Promise<User> {
+  async delete(id: string): Promise<void> {
     const user = await this.userRepository.findByPk<User>(id);
     await user.destroy();
-    return new User(user);
   }
 
-  async createUser(user: UserDto): Promise<User> {
+  async create(user: IUser): Promise<IUser> {
     return await this.userRepository.create<User>(user);
   }
 
-  async findAllUser() {
+  async getAll() {
     return this.userRepository.findAll();
   }
 }

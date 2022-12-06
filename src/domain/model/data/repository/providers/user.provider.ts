@@ -1,4 +1,4 @@
-import { User } from '../../UserModel';
+import { User } from '../../../../../infrastructure/drivenAdapters/sequelize/entities/UserEntity';
 import { USER_REPOSITORY } from '../../../config/constans';
 
 export const usersProviders = [{

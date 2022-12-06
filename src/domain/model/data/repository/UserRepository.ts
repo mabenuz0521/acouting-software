@@ -1,11 +1,12 @@
-import { UserDto } from '../dto/user.dto';
-import { User } from '../UserModel';
+import { GenericId, IGenericRepository } from './IGenericRepository'
+import { IUser } from '../UserModel'
 
-export abstract class UserRepository {
-  findAllUser: () => Promise<User[]>;
-  findUserById:(id: string)=> Promise<User>;
-  findUserByEmail:(email: string)=> Promise<User>;
-  updateUser: (id:string,user: UserDto) => Promise<User>;
-  createUser: (user: UserDto) => Promise<User>;
-  deleteUser: (id: string) => Promise<User>;
+export abstract class UserRepository implements IGenericRepository<IUser> {
+  getAll: () => Promise<IUser[]>
+  getById: (id: GenericId) => Promise<IUser>
+  create: (args: IUser) => Promise<IUser>
+  update: (args: IUser) => Promise<IUser>
+  delete: (id: GenericId) => Promise<void>
+  
+  getByEmail: (email: string) => Promise<IUser>
 }

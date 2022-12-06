@@ -8,7 +8,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export class UserDTO {
+export class UserInput {
     id?: Nullable<string>;
     email?: Nullable<string>;
     password?: Nullable<string>;
@@ -16,33 +16,33 @@ export class UserDTO {
 
 export class Token {
     token?: Nullable<string>;
-    user?: Nullable<User>;
+    user?: Nullable<UserResponse>;
 }
 
 export abstract class IQuery {
     abstract login(email: string, password: string): Nullable<Token> | Promise<Nullable<Token>>;
 
-    abstract singup(email: string, password: string): Nullable<User> | Promise<Nullable<User>>;
-
     abstract greetings(): string | Promise<string>;
 
     abstract greeting(): string | Promise<string>;
 
-    abstract users(): User[] | Promise<User[]>;
+    abstract getUsers(): UserResponse[] | Promise<UserResponse[]>;
 
-    abstract user(id: string): User | Promise<User>;
+    abstract getUser(id: string): UserResponse | Promise<UserResponse>;
 
-    abstract userEmail(email: string): User | Promise<User>;
-}
-
-export class User {
-    id?: Nullable<string>;
-    email?: Nullable<string>;
-    password?: Nullable<string>;
+    abstract getUserByEmail(email: string): UserResponse | Promise<UserResponse>;
 }
 
 export abstract class IMutation {
-    abstract update(id: string, userdto: UserDTO): User | Promise<User>;
+    abstract singup(email: string, password: string): Nullable<UserResponse> | Promise<Nullable<UserResponse>>;
+
+    abstract updateUser(id: string, userInput: UserInput): UserResponse | Promise<UserResponse>;
+}
+
+export class UserResponse {
+    id?: Nullable<string>;
+    email?: Nullable<string>;
+    password?: Nullable<string>;
 }
 
 type Nullable<T> = T | null;

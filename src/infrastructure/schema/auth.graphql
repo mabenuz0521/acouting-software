@@ -1,11 +1,14 @@
 type Token {
-    token: String
-    user: User
+  token: String
+  user: UserResponse
 }
 
 type Query {
-    login(email: String!, password: String!): Token
-    singup(email: String!, password: String!): User
-    greetings: String!
-    greeting:String!
+  login(email: String!, password: String!): Token
+  greetings: String!
+  greeting: String!
+}
+
+type Mutation {
+  singup(email: String!, password: String!): UserResponse
 }
