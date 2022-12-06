@@ -1,6 +1,8 @@
-import { Token , User} from 'src/domain/model/data/AuthModel';
+import { Token, UserAuth } from 'src/domain/model/data/AuthModel';
+import { User } from 'src/domain/model/data/UserModel';
 import { AuthRepository } from '../../../domain/model/data/repository/AuthRepository';
 import { FirebaseService } from './service/AuthFirebaseService';
+import * as bcrypt from 'bcrypt';
 import {
   AuthError,
   createUserWithEmailAndPassword,
@@ -15,11 +17,16 @@ import {
   DocumentSnapshot,
   DocumentData,
 } from 'firebase/firestore';
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, Inject } from '@nestjs/common';
+import { USER_REPOSITORY } from 'src/domain/model/config/constans';
+import { UserDto } from 'src/domain/model/data/dto/user.dto';
 
 @Injectable()
 export class AuthFirebaseRepository implements AuthRepository {
-  constructor(private firebaseService: FirebaseService) {}
+  constructor(
+    private firebaseService: FirebaseService,
+    @Inject(USER_REPOSITORY) private readonly userRepository: typeof User,
+  ) {}
 
   async loginWithEmailAndPassWord(email: string, password: string) {
     try {
@@ -37,15 +44,14 @@ export class AuthFirebaseRepository implements AuthRepository {
           id,
         );
         const snapShot: DocumentSnapshot<DocumentData> = await getDoc(docRef);
-        const user : User = {
+        const user: UserAuth = {
           id,
           email,
-          ...snapShot.data()
-
-        }
+          ...snapShot.data(),
+        };
         const response: Token = {
           token,
-          user
+          user,
         };
         return response;
       }
@@ -82,7 +88,14 @@ export class AuthFirebaseRepository implements AuthRepository {
           id,
         );
 
-        const response: User = {
+        const passwordHash = await bcrypt.hash(password,10);
+        const userDb: UserDto = {
+          id,
+          email,
+          password: passwordHash,
+        };
+        await this.userRepository.create(userDb); //create in db
+        const response: UserAuth = {
           id,
           email,
         };

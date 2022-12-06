@@ -37,8 +37,4 @@ export class User {
     password?: Nullable<string>;
 }
 
-export abstract class IMutation {
-    abstract register(userdto: UserDTO): User | Promise<User>;
-}
-
 type Nullable<T> = T | null;

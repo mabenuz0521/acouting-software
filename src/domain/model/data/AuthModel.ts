@@ -1,9 +1,9 @@
 export interface Token {
   token: string;
-  user: User
+  user: UserAuth
 }
 
-export interface User {
+export interface UserAuth {
   id?: string;
   email?: string;
   password?: string;

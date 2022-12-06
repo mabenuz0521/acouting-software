@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { usersProviders } from 'src/domain/model/data/repository/providers/user.provider';
 import { AuthRepository } from '../../../domain/model/data/repository/AuthRepository';
 import { AuthFirebaseRepository } from './AuthFirebaseRepository';
 import { FirebaseService } from './service/AuthFirebaseService';
@@ -10,6 +11,7 @@ import { FirebaseService } from './service/AuthFirebaseService';
       useClass: AuthFirebaseRepository,
     },
     FirebaseService,
+    ...usersProviders
   ],
   exports: [
     {
