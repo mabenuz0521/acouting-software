@@ -3,7 +3,7 @@ import { UserRepository } from 'src/domain/model/data/repository/UserRepository'
 import { USER_REPOSITORY } from 'src/domain/model/config/constans';
 import { User } from 'src/domain/model/data/UserModel';
 import { UserDto } from 'src/domain/model/data/dto/user.dto';
-import * as bcrypt from 'bcrypt'; 
+import * as bcrypt from 'bcrypt';
 @Injectable()
 export class UserDatabaseRepository implements UserRepository {
   constructor(
@@ -11,18 +11,28 @@ export class UserDatabaseRepository implements UserRepository {
   ) {}
 
   async findUserById(id: string): Promise<User> {
-    return await this.userRepository.findOne<User>({
+    const userFound = await this.userRepository.findOne<User>({
       where: {
         id,
       },
     });
+
+    if (!userFound) {
+      throw new HttpException('User not found.', HttpStatus.NOT_FOUND);
+    }
+    return userFound;
   }
   async findUserByEmail(email: string): Promise<User> {
-    return await this.userRepository.findOne<User>({
+    const userFound = await this.userRepository.findOne<User>({
       where: {
         email,
       },
     });
+
+    if (!userFound) {
+      throw new HttpException('User not found.', HttpStatus.NOT_FOUND);
+    }
+    return userFound;
   }
 
   async updateUser(id: string, user: UserDto): Promise<User> {
@@ -34,7 +44,7 @@ export class UserDatabaseRepository implements UserRepository {
     if (!userFound) {
       throw new HttpException('User not found.', HttpStatus.NOT_FOUND);
     }
-    const passwordHash = await bcrypt.hash(user.password,10);
+    const passwordHash = await bcrypt.hash(user.password, 10);
     userFound.email = user.email || userFound.email;
     userFound.password = passwordHash;
     try {
