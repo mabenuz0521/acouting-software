@@ -12,5 +12,11 @@ input UserDTO {
 
 type Query {
   users: [User!]!
+  user(id: String!):User!
+  userEmail(email:String!):User!
 }
 
+
+type Mutation{
+  update(id: String!, userdto: UserDTO!):User!
+}

@@ -29,12 +29,20 @@ export abstract class IQuery {
     abstract greeting(): string | Promise<string>;
 
     abstract users(): User[] | Promise<User[]>;
+
+    abstract user(id: string): User | Promise<User>;
+
+    abstract userEmail(email: string): User | Promise<User>;
 }
 
 export class User {
     id?: Nullable<string>;
     email?: Nullable<string>;
     password?: Nullable<string>;
+}
+
+export abstract class IMutation {
+    abstract update(id: string, userdto: UserDTO): User | Promise<User>;
 }
 
 type Nullable<T> = T | null;
