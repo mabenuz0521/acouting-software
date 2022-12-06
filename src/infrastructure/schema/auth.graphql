@@ -1,0 +1,11 @@
+type Token {
+    token: String
+    user: User
+}
+
+type Query {
+    login(email: String!, password: String!): Token
+    singup(email: String!, password: String!): User
+    greetings: String!
+    greeting:String!
+}
