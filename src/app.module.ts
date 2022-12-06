@@ -3,7 +3,6 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
-import { EnvironmentConfigModule } from './infrastructure/drivenAdapters/nestjs/environment-config/environment-config.module';
 import { LoggerModule } from './infrastructure/drivenAdapters/nestjs/logger/logger.module';
 import { ExceptionsModule } from './infrastructure/drivenAdapters/nestjs/exceptions/exceptions.module';
 import { ResolversModule } from './infrastructure/resolvers/resolvers.module';
@@ -11,8 +10,7 @@ import { ConfigModule } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
 import { FirebaseAuthModule } from 'nestjs-firebase-passport';
 import { AuthStrategy } from './infrastructure/drivenAdapters/firebase/strategy/AuthStrategy';
-import { SequelizeModule } from '@nestjs/sequelize';
-import { User } from './domain/model/data/UserModel';
+import { DatabaseModule } from './infrastructure/drivenAdapters/sequelize/database.module';
 @Module({
   imports: [
     FirebaseAuthModule.register({
@@ -20,7 +18,7 @@ import { User } from './domain/model/data/UserModel';
       issuer: process.env.FIREBASE_ISSUER,
     }),
     PassportModule,
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({isGlobal:true}),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       typePaths: ['./**/*.graphql'],
@@ -31,19 +29,10 @@ import { User } from './domain/model/data/UserModel';
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault],
     }),
-    SequelizeModule.forRoot({
-      dialect: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '',
-      database: 'acoutting_software',
-      models: [User],
-    }),
-    EnvironmentConfigModule,
     LoggerModule,
     ExceptionsModule,
     ResolversModule,
+    DatabaseModule,
   ],
   providers: [AuthStrategy],
 })

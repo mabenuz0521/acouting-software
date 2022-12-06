@@ -1,6 +1,6 @@
-import { Query, Resolver } from '@nestjs/graphql';
+import { Query, Resolver, Mutation,Args } from '@nestjs/graphql';
+import { UserDto } from 'src/domain/model/data/dto/user.dto';
 import { UserUseCases } from 'src/domain/usecase/UserUseCases';
-
 
 @Resolver('User')
 export class UserResolver{
@@ -10,4 +10,11 @@ export class UserResolver{
     users(){
         return this.userUseCases.findAll();
     }
+
+
+    @Mutation(()=> UserDto)
+    register(@Args('userdto') userdto: UserDto){
+        return this.userUseCases.create(userdto);
+    }
+
 }

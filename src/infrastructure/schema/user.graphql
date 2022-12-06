@@ -4,6 +4,16 @@ type User {
   password: String
 }
 
+input UserDTO {
+  id: String
+  email: String
+  password: String
+}
+
 type Query {
   users: [User!]!
+}
+
+type Mutation{
+  register(userdto: UserDTO!): User!
 }

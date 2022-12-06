@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { usersProviders } from 'src/domain/model/data/repository/providers/user.provider';
 import { UserRepository } from '../../../domain/model/data/repository/UserRepository';
 import { UserDatabaseRepository } from './UserDatabaseRepository';
 
@@ -7,7 +8,8 @@ import { UserDatabaseRepository } from './UserDatabaseRepository';
     {
       provide: UserRepository,
       useClass: UserDatabaseRepository
-    }
+    },
+    ...usersProviders
   ],
   exports:[
      {

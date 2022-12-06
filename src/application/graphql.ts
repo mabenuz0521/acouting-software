@@ -8,6 +8,12 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export class UserDTO {
+    id?: Nullable<string>;
+    email?: Nullable<string>;
+    password?: Nullable<string>;
+}
+
 export class Token {
     token?: Nullable<string>;
     user?: Nullable<User>;
@@ -29,6 +35,10 @@ export class User {
     id?: Nullable<string>;
     email?: Nullable<string>;
     password?: Nullable<string>;
+}
+
+export abstract class IMutation {
+    abstract register(userdto: UserDTO): User | Promise<User>;
 }
 
 type Nullable<T> = T | null;
