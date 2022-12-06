@@ -12,3 +12,14 @@ type Query {
 type Mutation {
   singup(email: String!, password: String!): UserResponse
 }
+
+
+## TODO Restructurar a este  schema
+# type AuthTokenResponse {
+#   token: String!
+# }
+
+# type Mutation {
+#   login(email: String!, password: String!): AuthTokenResponse
+#   signup(userInput: UserInput): AuthTokenResponse
+# }
