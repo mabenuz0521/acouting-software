@@ -1,4 +1,4 @@
 export interface FirebaseAuthConfig {
-  issuer: string;
-  audience: string;
+  issuer: string
+  audience: string
 }

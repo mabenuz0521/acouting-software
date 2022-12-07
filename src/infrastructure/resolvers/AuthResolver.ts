@@ -20,5 +20,4 @@ export class AuthResolver {
   ): Promise<AuthTokenResponse> {
     return new AuthPresenter(await this.authUseCases.singup(userInput))
   }
-
 }

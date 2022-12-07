@@ -1,8 +1,8 @@
-import {DynamicModule, Global, Module} from '@nestjs/common';
-import { PassportModule } from '@nestjs/passport';
-import { FirebaseStrategy } from './strategy/FirebaseStrategy';
-import { FirebaseAuthConfig } from './config/FirebaseAuthConfig';
-import { FIREBASE_AUTH_CONFIG } from './constans/constans';
+import { DynamicModule, Global, Module } from '@nestjs/common'
+import { PassportModule } from '@nestjs/passport'
+import { FirebaseStrategy } from './strategy/FirebaseStrategy'
+import { FirebaseAuthConfig } from './config/FirebaseAuthConfig'
+import { FIREBASE_AUTH_CONFIG } from './constans/constans'
 
 @Global()
 @Module({})
@@ -19,6 +19,6 @@ export class FirebaseAuthModule {
         FirebaseStrategy,
       ],
       exports: [PassportModule, FirebaseStrategy, FIREBASE_AUTH_CONFIG],
-    };
+    }
   }
 }

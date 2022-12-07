@@ -1,7 +1,7 @@
-import * as dotenv from 'dotenv';
-import { IDataBaseConfig } from './database.interface';
+import * as dotenv from 'dotenv'
+import { IDataBaseConfig } from './database.interface'
 
-dotenv.config();
+dotenv.config()
 
 export const databaseConfig: IDataBaseConfig = {
   development: {
@@ -28,4 +28,4 @@ export const databaseConfig: IDataBaseConfig = {
     port: process.env.DB_PORT,
     dialect: process.env.DB_DIALECT,
   },
-};
+}

@@ -1,6 +1,6 @@
-import { Module } from '@nestjs/common';
-import { usersProviders } from 'src/domain/model/data/repository/providers/user.provider';
-import { databaseProviders } from './database.providers';
+import { Module } from '@nestjs/common'
+import { usersProviders } from 'src/domain/model/data/repository/providers/user.provider'
+import { databaseProviders } from './database.providers'
 
 @Module({
   providers: [...databaseProviders, ...usersProviders],

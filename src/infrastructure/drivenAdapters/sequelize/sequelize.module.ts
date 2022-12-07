@@ -1,21 +1,21 @@
-import { Module } from '@nestjs/common';
-import { usersProviders } from 'src/domain/model/data/repository/providers/user.provider';
-import { UserRepository } from '../../../domain/model/data/repository/UserRepository';
-import { UserDatabaseRepository } from './UserDatabaseRepository';
+import { Module } from '@nestjs/common'
+import { usersProviders } from 'src/domain/model/data/repository/providers/user.provider'
+import { UserRepository } from '../../../domain/model/data/repository/UserRepository'
+import { UserDatabaseRepository } from './UserDatabaseRepository'
 
 @Module({
-  providers:[
+  providers: [
     {
       provide: UserRepository,
-      useClass: UserDatabaseRepository
+      useClass: UserDatabaseRepository,
     },
-    ...usersProviders
+    ...usersProviders,
   ],
-  exports:[
-     {
+  exports: [
+    {
       provide: UserRepository,
-      useClass: UserDatabaseRepository
-     }
-  ]
+      useClass: UserDatabaseRepository,
+    },
+  ],
 })
 export class SequelizeConfigModule {}

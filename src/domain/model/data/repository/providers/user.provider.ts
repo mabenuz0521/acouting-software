@@ -1,7 +1,9 @@
-import { User } from '../../../../../infrastructure/drivenAdapters/sequelize/entities/UserEntity';
-import { USER_REPOSITORY } from '../../../config/constans';
+import { User } from '../../../../../infrastructure/drivenAdapters/sequelize/entities/UserEntity'
+import { USER_REPOSITORY } from '../../../config/constans'
 
-export const usersProviders = [{
+export const usersProviders = [
+  {
     provide: USER_REPOSITORY,
     useValue: User,
-}];
+  },
+]
