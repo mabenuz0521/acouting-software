@@ -1,10 +1,3 @@
-export interface Token {
-  token: string;
-  user: UserAuth
-}
-
-export interface UserAuth {
-  id?: string;
-  email?: string;
-  password?: string;
+export interface IAuth {
+  token: string
 }

@@ -1,25 +1,9 @@
-type Token {
-  token: String
-  user: UserResponse
-}
-
-type Query {
-  login(email: String!, password: String!): Token
-  greetings: String!
-  greeting: String!
+#TODO Restructurar a este  schema
+type AuthTokenResponse {
+  token: String!
 }
 
 type Mutation {
-  singup(email: String!, password: String!): UserResponse
+  login(email: String!, password: String!): AuthTokenResponse
+  signup(userInput: UserInput): AuthTokenResponse
 }
-
-
-## TODO Restructurar a este  schema
-# type AuthTokenResponse {
-#   token: String!
-# }
-
-# type Mutation {
-#   login(email: String!, password: String!): AuthTokenResponse
-#   signup(userInput: UserInput): AuthTokenResponse
-# }

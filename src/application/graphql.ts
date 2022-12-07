@@ -10,31 +10,21 @@
 
 export class UserInput {
     id?: Nullable<string>;
-    email?: Nullable<string>;
-    password?: Nullable<string>;
+    name: string;
+    lastname: string;
+    email: string;
+    password: string;
+    nickname?: Nullable<string>;
 }
 
-export class Token {
-    token?: Nullable<string>;
-    user?: Nullable<UserResponse>;
-}
-
-export abstract class IQuery {
-    abstract login(email: string, password: string): Nullable<Token> | Promise<Nullable<Token>>;
-
-    abstract greetings(): string | Promise<string>;
-
-    abstract greeting(): string | Promise<string>;
-
-    abstract getUsers(): UserResponse[] | Promise<UserResponse[]>;
-
-    abstract getUser(id: string): UserResponse | Promise<UserResponse>;
-
-    abstract getUserByEmail(email: string): UserResponse | Promise<UserResponse>;
+export class AuthTokenResponse {
+    token: string;
 }
 
 export abstract class IMutation {
-    abstract singup(email: string, password: string): Nullable<UserResponse> | Promise<Nullable<UserResponse>>;
+    abstract login(email: string, password: string): Nullable<AuthTokenResponse> | Promise<Nullable<AuthTokenResponse>>;
+
+    abstract signup(userInput?: Nullable<UserInput>): Nullable<AuthTokenResponse> | Promise<Nullable<AuthTokenResponse>>;
 
     abstract updateUser(id: string, userInput: UserInput): UserResponse | Promise<UserResponse>;
 }
@@ -42,7 +32,17 @@ export abstract class IMutation {
 export class UserResponse {
     id?: Nullable<string>;
     email?: Nullable<string>;
-    password?: Nullable<string>;
+    name?: Nullable<string>;
+    lastname?: Nullable<string>;
+    nickname?: Nullable<string>;
+}
+
+export abstract class IQuery {
+    abstract getUsers(): UserResponse[] | Promise<UserResponse[]>;
+
+    abstract getUser(id: string): UserResponse | Promise<UserResponse>;
+
+    abstract getUserByEmail(email: string): UserResponse | Promise<UserResponse>;
 }
 
 type Nullable<T> = T | null;

@@ -1,14 +1,15 @@
-import { Token, UserAuth } from 'src/domain/model/data/AuthModel';
-import { User } from 'src/infrastructure/drivenAdapters/sequelize/entities/UserEntity';
-import { AuthRepository } from '../../../domain/model/data/repository/AuthRepository';
-import { FirebaseService } from './service/AuthFirebaseService';
-import * as bcrypt from 'bcrypt';
+import { IAuth } from 'src/domain/model/data/AuthModel'
+import { IUser } from 'src/domain/model/data/UserModel'
+import { User } from 'src/infrastructure/drivenAdapters/sequelize/entities/UserEntity'
+import { AuthRepository } from '../../../domain/model/data/repository/AuthRepository'
+import { FirebaseService } from './service/AuthFirebaseService'
+import * as bcrypt from 'bcrypt'
 import {
   AuthError,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   UserCredential,
-} from 'firebase/auth';
+} from 'firebase/auth'
 import {
   setDoc,
   DocumentReference,
@@ -16,104 +17,103 @@ import {
   getDoc,
   DocumentSnapshot,
   DocumentData,
-} from 'firebase/firestore';
-import { HttpException, HttpStatus, Injectable, Inject } from '@nestjs/common';
-import { USER_REPOSITORY } from 'src/domain/model/config/constans';
-import { UserDto } from 'src/domain/model/data/dto/user.dto';
+} from 'firebase/firestore'
+import { HttpException, HttpStatus, Injectable, Inject } from '@nestjs/common'
+import { USER_REPOSITORY } from 'src/domain/model/config/constans'
 
 @Injectable()
 export class AuthFirebaseRepository implements AuthRepository {
   constructor(
     private firebaseService: FirebaseService,
-    @Inject(USER_REPOSITORY) private readonly userRepository: typeof User,
+    @Inject(USER_REPOSITORY) private readonly userRepository: typeof User
   ) {}
 
-  async loginWithEmailAndPassWord(email: string, password: string) {
+  async loginWithEmailAndPassWord(
+    email: string,
+    password: string
+  ): Promise<IAuth> {
     try {
       const userCredential: UserCredential = await signInWithEmailAndPassword(
         this.firebaseService.auth,
         email,
-        password,
-      );
+        password
+      )
 
       if (userCredential) {
-        const id: string = userCredential.user.uid;
-        const token: string = await userCredential.user.getIdToken(true);
+        const id: string = userCredential.user.uid
+        const token: string = await userCredential.user.getIdToken(true)
         const docRef: DocumentReference = doc(
           this.firebaseService.userCollection,
-          id,
-        );
-        const snapShot: DocumentSnapshot<DocumentData> = await getDoc(docRef);
-        const user: UserAuth = {
-          id,
-          email,
-          ...snapShot.data(),
-        };
-        const response: Token = {
+          id
+        )
+        const snapShot: DocumentSnapshot<DocumentData> = await getDoc(docRef)
+
+        const response: IAuth = {
           token,
-          user,
-        };
-        return response;
+        }
+        return response
       }
     } catch (error) {
-      const firebaseAuthError = error as AuthError;
+      const firebaseAuthError = error as AuthError
       if (firebaseAuthError.code === 'auth/wrong-password') {
         throw new HttpException(
           'Email o contraseña incorrecta.',
-          HttpStatus.FORBIDDEN,
-        );
+          HttpStatus.FORBIDDEN
+        )
       }
       if (firebaseAuthError.code === 'auth/user-not-found') {
         throw new HttpException(
           'El email no fue encontrado.',
-          HttpStatus.NOT_FOUND,
-        );
+          HttpStatus.NOT_FOUND
+        )
       }
     }
   }
 
-  async singupWithEmailAndPassword(email: string, password: string) {
+  async singupWithEmailAndPassword(user: IUser): Promise<IAuth> {
     try {
       const userCredential: UserCredential =
         await createUserWithEmailAndPassword(
           this.firebaseService.auth,
-          email,
-          password,
-        );
+          user.email,
+          user.password
+        )
 
       if (userCredential) {
-        const id: string = userCredential.user.uid;
+        const idUser: string = userCredential.user.uid
+        user.id = idUser
+        const token: string = await userCredential.user.getIdToken(true)
         const docRef: DocumentReference = doc(
           this.firebaseService.userCollection,
-          id,
-        );
-
-        const passwordHash = await bcrypt.hash(password,10);
-        const userDb: UserDto = {
-          id,
-          email,
-          password: passwordHash,
-        };
-        await this.userRepository.create(userDb); //create in db
-        const response: UserAuth = {
-          id,
-          email,
-        };
+          idUser
+        )
+        const hasPassword = await bcrypt.hash(user.password, 10)
+        const userdb: IUser = {
+          id: idUser,
+          password: hasPassword,
+          email: user.email,
+          lastname: user.lastname,
+          name: user.name,
+          nickname: user.nickname,
+        }
+        await this.userRepository.create(userdb) //create in db
+        const response: IAuth = {
+          token,
+        }
 
         await setDoc(docRef, {
-          email,
-          password,
-        });
-        return response;
+          user,
+        })
+        return response
       }
     } catch (error: unknown) {
-      const firebaseAuthError = error as AuthError;
+      const firebaseAuthError = error as AuthError
 
       if (firebaseAuthError.code === 'auth/email-already-in-use') {
         throw new HttpException(
           'Este Correo ya se encuentra registrado',
-          HttpStatus.CONFLICT,
-        );
+          HttpStatus.CONFLICT
+        )
       }
     }
   }
