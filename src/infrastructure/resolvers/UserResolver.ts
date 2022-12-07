@@ -9,6 +9,7 @@ export class UserResolver {
   constructor(private userUseCases: UserUseCases) {}
 
   @Query()
+  @UseGuards(GqlAuthGuard)
   async getUsers(): Promise<UserResponse[]> {
     const data = await this.userUseCases.findAll()
     return data.map((user) => new UserPresenter(user))
@@ -22,11 +23,13 @@ export class UserResolver {
   }
 
   @Query()
+  @UseGuards(GqlAuthGuard)
   async getUser(@Args('id') id: string): Promise<UserResponse> {
     return new UserPresenter(await this.userUseCases.findUserById(id))
   }
 
   @Query()
+  @UseGuards(GqlAuthGuard)
   async getUserByEmail(@Args('email') email: string): Promise<UserResponse> {
     return new UserPresenter(await this.userUseCases.findUserByEmail(email))
   }
