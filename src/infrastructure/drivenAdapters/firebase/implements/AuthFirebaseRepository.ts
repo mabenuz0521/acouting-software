@@ -1,8 +1,8 @@
 import { IAuth } from 'src/domain/model/data/AuthModel'
 import { IUser } from 'src/domain/model/data/UserModel'
 import { User } from 'src/infrastructure/drivenAdapters/sequelize/entities/UserEntity'
-import { AuthRepository } from '../../../domain/model/data/repository/AuthRepository'
-import { FirebaseService } from './service/AuthFirebaseService'
+import { AuthRepository } from '../../../../domain/model/data/repository/AuthRepository'
+import { FirebaseService } from '../service/AuthFirebaseService'
 import * as bcrypt from 'bcrypt'
 import {
   AuthError,

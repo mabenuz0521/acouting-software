@@ -19,6 +19,7 @@ type Query {
   getUsers: [UserResponse!]!
   getUser(id: String!): UserResponse!
   getUserByEmail(email: String!): UserResponse!
+  greeting: String!
 }
 
 type Mutation {

@@ -43,6 +43,8 @@ export abstract class IQuery {
     abstract getUser(id: string): UserResponse | Promise<UserResponse>;
 
     abstract getUserByEmail(email: string): UserResponse | Promise<UserResponse>;
+
+    abstract greeting(): string | Promise<string>;
 }
 
 type Nullable<T> = T | null;

@@ -21,7 +21,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@nestjs/apollo": "^10.1.6",
+    "@nestjs/apollo": "^10.1.7",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.0",
@@ -39,7 +39,6 @@
     "graphql": "^16.6.0",
     "jwks-rsa": "^2.0.5",
     "mysql2": "^2.3.3",
-    "nestjs-firebase-passport": "^1.0.3",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
     "reflect-metadata": "^0.1.13",
