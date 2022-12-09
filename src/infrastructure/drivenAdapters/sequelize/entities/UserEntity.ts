@@ -1,5 +1,13 @@
-import { Column, Model, Table, DataType } from 'sequelize-typescript'
+import {
+  Column,
+  Model,
+  Table,
+  DataType,
+  ForeignKey,
+  BelongsTo,
+} from 'sequelize-typescript'
 import { IUser } from '../../../../domain/model/data/UserModel'
+import { Catalog } from './CatalogEntity'
 
 @Table
 export class User extends Model<IUser> implements IUser {
@@ -33,4 +41,16 @@ export class User extends Model<IUser> implements IUser {
     type: DataType.STRING,
   })
   nickname?: string
+
+  @ForeignKey(() => Catalog)
+  @Column({
+    type: DataType.INTEGER,
+  })
+  documentTypeId: number
+
+  @ForeignKey(() => Catalog)
+  @Column({
+    type: DataType.INTEGER,
+  })
+  planId: number
 }

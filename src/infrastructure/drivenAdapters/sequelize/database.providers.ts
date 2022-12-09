@@ -6,7 +6,8 @@ import {
   PRODUCTION,
 } from '../../../domain/model/config/constans'
 import { databaseConfig } from 'src/domain/model/config/database.config'
-import { User } from '../sequelize/entities/UserEntity'
+import { User } from './entities/UserEntity'
+import { Catalog } from './entities/CatalogEntity'
 
 export const databaseProviders = [
   {
@@ -28,7 +29,7 @@ export const databaseProviders = [
           config = databaseConfig.development
       }
       const sequelize = new Sequelize(config)
-      sequelize.addModels([User])
+      sequelize.addModels([User, Catalog])
       await sequelize.sync()
       return sequelize
     },
