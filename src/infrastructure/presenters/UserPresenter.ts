@@ -9,5 +9,6 @@ export class UserPresenter extends UserResponse {
     this.name = user.name
     this.lastname = user.lastname
     this.nickname = user.nickname
+    this.planId = user.planId
   }
 }

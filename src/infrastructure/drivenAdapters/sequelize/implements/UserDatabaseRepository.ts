@@ -2,7 +2,7 @@ import { Injectable, Inject, HttpStatus, HttpException } from '@nestjs/common'
 import { UserRepository } from 'src/domain/model/data/repository/UserRepository'
 import { USER_REPOSITORY } from 'src/domain/model/config/constans'
 import { IUser } from 'src/domain/model/data/UserModel'
-import { User } from '../sequelize/entities/UserEntity'
+import { User } from '../entities/UserEntity'
 import * as bcrypt from 'bcrypt'
 
 @Injectable()
@@ -53,6 +53,24 @@ export class UserDatabaseRepository implements UserRepository {
       return await userFound.save()
     } catch (err) {
       throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR)
+    }
+  }
+
+  async suscribeUser(userId: string, planId: number): Promise<IUser> {
+    const userFound = await this.userRepository.findOne<User>({
+      where: {
+        id: userId,
+      },
+    })
+    if (!userFound) {
+      throw new HttpException('User not found.', HttpStatus.NOT_FOUND)
+    }
+    userFound.planId = planId
+    userFound.documentTypeId = planId
+    try {
+      return await userFound.save()
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR)
     }
   }
 

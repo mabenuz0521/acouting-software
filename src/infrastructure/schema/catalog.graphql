@@ -1,0 +1,16 @@
+type CatalogResponse{
+  id: Int	
+  name: String
+  catalogId: Int
+}
+
+input CatalogInput{
+	name: String
+	catalogId: Int
+}
+
+type Mutation{
+	createCatalog(catalogInput: CatalogInput!): CatalogResponse!
+}
+
+

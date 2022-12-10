@@ -6,7 +6,7 @@ export abstract class UserRepository implements IGenericRepository<IUser> {
   getById: (id: GenericId) => Promise<IUser>
   create: (args: IUser) => Promise<IUser>
   update: (args: IUser) => Promise<IUser>
-  delete: (id: GenericId) => Promise<void>
-  
+  delete: (id: GenericId) => Promise<void>  
   getByEmail: (email: string) => Promise<IUser>
+  suscribeUser:(userId: string, planId: number) => Promise<IUser>
 }

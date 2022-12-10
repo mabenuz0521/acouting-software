@@ -43,4 +43,14 @@ export class UserResolver {
       await this.userUseCases.updateUser(id, { ...userInput })
     )
   }
+
+  @Mutation()
+  async suscribeUser(
+    @Args('userId') userId: string,
+    @Args('planId') planId: number
+  ): Promise<UserResponse> {
+    return new UserPresenter(
+      await this.userUseCases.suscribeUser(userId, planId)
+    )
+  }
 }

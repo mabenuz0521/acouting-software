@@ -1,5 +1,5 @@
 export interface ICatalog {
-  id: number
-  name: string
-  catalogId: number
+  id?: number
+  name?: string
+  catalogId?: number
 }

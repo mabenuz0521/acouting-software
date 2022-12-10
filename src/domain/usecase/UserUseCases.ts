@@ -28,6 +28,10 @@ export class UserUseCases {
     return this.userRepository.update(Object.assign(user, userParams))
   }
 
+  async suscribeUser(id: string, planId: number) {
+    return this.userRepository.suscribeUser(id, planId)
+  }
+
   deleteUser(id: string) {
     return this.userRepository.delete(id)
   }

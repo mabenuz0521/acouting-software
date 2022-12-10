@@ -8,6 +8,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export class CatalogInput {
+    name?: Nullable<string>;
+    catalogId?: Nullable<number>;
+}
+
 export class UserInput {
     id?: Nullable<string>;
     name: string;
@@ -15,6 +20,8 @@ export class UserInput {
     email: string;
     password: string;
     nickname?: Nullable<string>;
+    documentTypeId?: Nullable<number>;
+    planId?: Nullable<number>;
 }
 
 export class AuthTokenResponse {
@@ -26,7 +33,17 @@ export abstract class IMutation {
 
     abstract signup(userInput?: Nullable<UserInput>): Nullable<AuthTokenResponse> | Promise<Nullable<AuthTokenResponse>>;
 
+    abstract createCatalog(catalogInput: CatalogInput): CatalogResponse | Promise<CatalogResponse>;
+
     abstract updateUser(id: string, userInput: UserInput): UserResponse | Promise<UserResponse>;
+
+    abstract suscribeUser(userId: string, planId: number): UserResponse | Promise<UserResponse>;
+}
+
+export class CatalogResponse {
+    id?: Nullable<number>;
+    name?: Nullable<string>;
+    catalogId?: Nullable<number>;
 }
 
 export class UserResponse {
@@ -35,6 +52,8 @@ export class UserResponse {
     name?: Nullable<string>;
     lastname?: Nullable<string>;
     nickname?: Nullable<string>;
+    planId?: Nullable<number>;
+    documentTypeId?: Nullable<number>;
 }
 
 export abstract class IQuery {
