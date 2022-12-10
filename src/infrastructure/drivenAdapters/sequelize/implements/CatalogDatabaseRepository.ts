@@ -17,5 +17,11 @@ export class CatalogDatabaseRepository implements CatalogRepository {
 
   getById: (id: number) => Promise<ICatalog>
 
-  getAll: () => Promise<ICatalog[]>
+  async getAll() {
+    return await this.catalogRepository.findAll({
+      where: {
+        catalogId: null,
+      },
+    })
+  }
 }

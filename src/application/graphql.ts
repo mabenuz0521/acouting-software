@@ -46,6 +46,18 @@ export class CatalogResponse {
     catalogId?: Nullable<number>;
 }
 
+export abstract class IQuery {
+    abstract getCatalogs(): CatalogResponse[] | Promise<CatalogResponse[]>;
+
+    abstract getUsers(): UserResponse[] | Promise<UserResponse[]>;
+
+    abstract getUser(id: string): UserResponse | Promise<UserResponse>;
+
+    abstract getUserByEmail(email: string): UserResponse | Promise<UserResponse>;
+
+    abstract greeting(): string | Promise<string>;
+}
+
 export class UserResponse {
     id?: Nullable<string>;
     email?: Nullable<string>;
@@ -54,16 +66,6 @@ export class UserResponse {
     nickname?: Nullable<string>;
     planId?: Nullable<number>;
     documentTypeId?: Nullable<number>;
-}
-
-export abstract class IQuery {
-    abstract getUsers(): UserResponse[] | Promise<UserResponse[]>;
-
-    abstract getUser(id: string): UserResponse | Promise<UserResponse>;
-
-    abstract getUserByEmail(email: string): UserResponse | Promise<UserResponse>;
-
-    abstract greeting(): string | Promise<string>;
 }
 
 type Nullable<T> = T | null;

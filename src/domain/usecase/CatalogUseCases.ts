@@ -10,5 +10,7 @@ export class CatalogUseCases {
     return this.catalogRespository.create(catalog)
   }
 
-  
+  getAllCatalog() {
+    return this.catalogRespository.getAll()
+  }
 }

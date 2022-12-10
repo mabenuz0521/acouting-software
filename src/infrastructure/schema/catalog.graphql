@@ -9,6 +9,10 @@ input CatalogInput{
 	catalogId: Int
 }
 
+type Query {
+  getCatalogs:[CatalogResponse!]!
+}
+
 type Mutation{
 	createCatalog(catalogInput: CatalogInput!): CatalogResponse!
 }
