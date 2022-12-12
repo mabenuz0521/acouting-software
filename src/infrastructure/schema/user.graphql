@@ -5,6 +5,7 @@ type UserResponse {
   lastname: String
   nickname: String
   planId: Int
+  plan: CatalogResponse
   documentTypeId: Int
 }
 

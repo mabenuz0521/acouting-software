@@ -20,7 +20,7 @@ export class CatalogDatabaseRepository implements CatalogRepository {
       where: {
         id
       },
-      include: 'catalogReferences'
+      include: 'subCatalog'
     })
   }
 
@@ -29,7 +29,7 @@ export class CatalogDatabaseRepository implements CatalogRepository {
       where: {
         catalogId: null,
       },
-      include: 'catalogReferences'
+      include: 'subCatalog'
     })
   }
 }

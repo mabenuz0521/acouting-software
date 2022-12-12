@@ -2,5 +2,9 @@ export interface ICatalog {
   id?: number
   name: string
   catalogId?: number
-  subcatalog?: [ICatalog]
+
+  /**
+   * The above fields only to present data besides of consumers
+   */
+  subCatalog?: ICatalog[]
 }

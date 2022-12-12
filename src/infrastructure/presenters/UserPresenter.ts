@@ -10,5 +10,6 @@ export class UserPresenter extends UserResponse {
     this.lastname = user.lastname
     this.nickname = user.nickname
     this.planId = user.planId
+    this.plan = user.plan
   }
 }

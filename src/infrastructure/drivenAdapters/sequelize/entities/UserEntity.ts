@@ -49,7 +49,7 @@ export class User extends Model<IUser> implements IUser {
   documentTypeId: number
 
   @BelongsTo(()=> Catalog, 'documentTypeId')
-  document: Catalog
+  documentType: Catalog
 
   @ForeignKey(() => Catalog)
   @Column({

@@ -12,6 +12,7 @@ import { User } from './UserEntity'
 
 @Table
 export class Catalog extends Model<ICatalog> implements ICatalog {
+  
   @Column({
     primaryKey: true,
     autoIncrement: true,
@@ -29,15 +30,12 @@ export class Catalog extends Model<ICatalog> implements ICatalog {
   })
   catalogId: number
 
-  @BelongsTo(() => Catalog)
-  catalogReference: Catalog
-
   @HasMany(()=> Catalog)
-  catalogReferences: Catalog[]
+  subCatalog: Catalog[]
 
   @HasMany(() => User, 'documentTypeId')
-  documenttypeid: User[]
+  documentTypeId: User[]
 
   @HasMany(() => User, 'planId')
-  planid: User[]
+  planId: User[]
 }

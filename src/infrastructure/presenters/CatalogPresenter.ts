@@ -7,6 +7,10 @@ export class CatalogPresenter extends CatalogResponse {
     this.id = catalog.id
     this.name = catalog.name
     this.catalogId = catalog.catalogId
-    this.subcatalog = catalog.subcatalog
+    this.subcatalog = catalog.subCatalog.map(c => ({
+      id: c.id,
+      name: c.name,
+      catalogId: c.catalogId
+    }))
   }
 }

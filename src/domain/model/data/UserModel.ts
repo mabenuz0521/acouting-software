@@ -1,3 +1,5 @@
+import { ICatalog } from "./CatalogModel"
+
 export interface IUser {
   id?: string
   name: string
@@ -7,4 +9,7 @@ export interface IUser {
   nickname?: string
   documentTypeId?: number
   planId?: number
+  
+  documentType?: ICatalog
+  plan?: ICatalog
 }

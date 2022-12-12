@@ -61,6 +61,7 @@ export class UserResponse {
     lastname?: Nullable<string>;
     nickname?: Nullable<string>;
     planId?: Nullable<number>;
+    plan?: Nullable<CatalogResponse>;
     documentTypeId?: Nullable<number>;
 }
 
