@@ -30,7 +30,10 @@ export class Catalog extends Model<ICatalog> implements ICatalog {
   catalogId: number
 
   @BelongsTo(() => Catalog)
-  catalog: Catalog
+  catalogReference: Catalog
+
+  @HasMany(()=> Catalog)
+  catalogReferences: Catalog[]
 
   @HasMany(() => User, 'documentTypeId')
   documenttypeid: User[]

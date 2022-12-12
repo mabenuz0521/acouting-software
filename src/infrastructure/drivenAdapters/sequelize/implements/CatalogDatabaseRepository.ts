@@ -18,8 +18,9 @@ export class CatalogDatabaseRepository implements CatalogRepository {
   async getById(id: number): Promise<ICatalog> {
     return await this.catalogRepository.findOne({
       where: {
-        id,
+        id
       },
+      include: 'catalogReferences'
     })
   }
 
@@ -28,6 +29,7 @@ export class CatalogDatabaseRepository implements CatalogRepository {
       where: {
         catalogId: null,
       },
+      include: 'catalogReferences'
     })
   }
 }

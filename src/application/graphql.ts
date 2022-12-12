@@ -37,13 +37,13 @@ export class CatalogResponse {
     id?: Nullable<number>;
     name: string;
     catalogId?: Nullable<number>;
-    subcatalogId?: Nullable<number>;
+    subcatalog?: Nullable<Nullable<CatalogResponse>[]>;
 }
 
 export abstract class IQuery {
     abstract getCatalogs(): CatalogResponse[] | Promise<CatalogResponse[]>;
 
-    abstract getCatalog(id: number): CatalogResponse | Promise<CatalogResponse>;
+    abstract getCatalogById(id: number): CatalogResponse | Promise<CatalogResponse>;
 
     abstract getUsers(): UserResponse[] | Promise<UserResponse[]>;
 

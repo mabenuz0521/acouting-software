@@ -7,6 +7,7 @@ import { UserResolver } from './UserResolver'
 import { CatalogUseCases } from 'src/domain/usecase/CatalogUseCases'
 import { CatalogResolver } from './CatalogResolver'
 import { SequelizeConfigModule } from '../drivenAdapters/sequelize/sequelize.module'
+import { TesController } from './testController'
 
 @Module({
   imports: [FirebaseModule, SequelizeConfigModule],
@@ -18,5 +19,6 @@ import { SequelizeConfigModule } from '../drivenAdapters/sequelize/sequelize.mod
     CatalogUseCases,
     CatalogResolver,
   ],
+  controllers: [TesController],
 })
 export class ResolversModule {}

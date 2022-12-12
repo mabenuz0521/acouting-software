@@ -2,12 +2,12 @@ type CatalogResponse {
   id: Int
   name: String!
   catalogId: Int
-  subcatalogId: Int
+  subcatalog: [CatalogResponse]
 }
 
 type Query {
   getCatalogs: [CatalogResponse!]!
-  getCatalog(id: Int!): CatalogResponse!
+  getCatalogById(id: Int!): CatalogResponse!
 }
 
 type Mutation {

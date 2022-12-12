@@ -19,7 +19,7 @@ export class CatalogResolver {
   }
 
   @Query()
-  async getCatalog(@Args('id') id: number): Promise<CatalogResponse> {
+  async getCatalogById(@Args('id') id: number): Promise<CatalogResponse> {
     return new CatalogPresenter(await this.catalogUseCases.getCatalog(id))
   }
 
