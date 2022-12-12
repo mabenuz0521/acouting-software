@@ -6,7 +6,7 @@ import { User } from '../entities/UserEntity'
 import * as bcrypt from 'bcrypt'
 
 @Injectable()
-export class UserDatabaseRepository implements UserRepository {
+export class UserSqlRepository implements UserRepository {
   constructor(
     @Inject(USER_REPOSITORY) private readonly userRepository: typeof User
   ) {}

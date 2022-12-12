@@ -5,7 +5,7 @@ import { CATALOG_REPOSITORY } from 'src/domain/model/config/constans'
 import { Catalog } from '../entities/CatalogEntity'
 
 @Injectable()
-export class CatalogDatabaseRepository implements CatalogRepository {
+export class CatalogSqlRepository implements CatalogRepository {
   constructor(
     @Inject(CATALOG_REPOSITORY)
     private readonly catalogRepository: typeof Catalog

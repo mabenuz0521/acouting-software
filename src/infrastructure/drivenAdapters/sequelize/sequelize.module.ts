@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common'
 import { usersProviders } from 'src/domain/model/data/repository/providers/user.provider'
 import { UserRepository } from '../../../domain/model/data/repository/UserRepository'
-import { UserDatabaseRepository } from './implements/UserDatabaseRepository'
-import { CatalogDatabaseRepository } from './implements/CatalogDatabaseRepository'
+import { UserSqlRepository } from './implements/UserSqlRepository'
+import { CatalogSqlRepository } from './implements/CatalogSqlRepository'
 import { catalogProviders } from 'src/domain/model/data/repository/providers/catalog.provider'
 import { CatalogRepository } from '../../../domain/model/data/repository/CatalogRespository'
 
@@ -10,11 +10,11 @@ import { CatalogRepository } from '../../../domain/model/data/repository/Catalog
   providers: [
     {
       provide: UserRepository,
-      useClass: UserDatabaseRepository,
+      useClass: UserSqlRepository,
     },
     {
       provide: CatalogRepository,
-      useClass: CatalogDatabaseRepository,
+      useClass: CatalogSqlRepository,
     },
     ...usersProviders,
     ...catalogProviders,
@@ -22,11 +22,11 @@ import { CatalogRepository } from '../../../domain/model/data/repository/Catalog
   exports: [
     {
       provide: UserRepository,
-      useClass: UserDatabaseRepository,
+      useClass: UserSqlRepository,
     },
     {
       provide: CatalogRepository,
-      useClass: CatalogDatabaseRepository,
+      useClass: CatalogSqlRepository,
     },
   ],
 })
