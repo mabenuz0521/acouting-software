@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common'
+import { Controller, Get, Param , ParseIntPipe} from '@nestjs/common'
 import { CatalogUseCases } from 'src/domain/usecase/CatalogUseCases'
 
 @Controller('/')
@@ -9,5 +9,11 @@ export class TesController {
   async getPlans() {
     return await this.catalogUsesCases.getAllCatalog()
   }
+
+  @Get('catalogs/:id')
+  async getPlan(@Param('id',ParseIntPipe) id: number) {
+    return await this.catalogUsesCases.getCatalog(id)
+  }
+
 
 }
