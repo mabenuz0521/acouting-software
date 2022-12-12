@@ -10,6 +10,7 @@ import { ConfigModule } from '@nestjs/config'
 import { PassportModule } from '@nestjs/passport'
 import { DatabaseModule } from './infrastructure/drivenAdapters/sequelize/database.module'
 import { FirebaseAuthModule } from './infrastructure/drivenAdapters/firebase'
+
 @Module({
   imports: [
     FirebaseAuthModule.register({

@@ -7,5 +7,6 @@ export class CatalogPresenter extends CatalogResponse {
     this.id = catalog.id
     this.name = catalog.name
     this.catalogId = catalog.catalogId
+    this.subcatalogId = catalog.subcatalogId
   }
 }

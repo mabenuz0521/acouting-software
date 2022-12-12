@@ -28,5 +28,4 @@ type Query {
 
 type Mutation {
   updateUser(id: String!, userInput: UserInput!): UserResponse!
-	suscribeUser(userId:String!,planId:Int!): UserResponse!
 }

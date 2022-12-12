@@ -5,6 +5,7 @@ import { UserDatabaseRepository } from './implements/UserDatabaseRepository'
 import { CatalogDatabaseRepository } from './implements/CatalogDatabaseRepository'
 import { catalogProviders } from 'src/domain/model/data/repository/providers/catalog.provider'
 import { CatalogRepository } from '../../../domain/model/data/repository/CatalogRespository'
+
 @Module({
   providers: [
     {

@@ -1,20 +1,15 @@
-type CatalogResponse{
-  id: Int	
-  name: String
+type CatalogResponse {
+  id: Int
+  name: String!
   catalogId: Int
-}
-
-input CatalogInput{
-	name: String
-	catalogId: Int
+  subcatalogId: Int
 }
 
 type Query {
-  getCatalogs:[CatalogResponse!]!
+  getCatalogs: [CatalogResponse!]!
+  getCatalog(id: Int!): CatalogResponse!
 }
 
-type Mutation{
-	createCatalog(catalogInput: CatalogInput!): CatalogResponse!
+type Mutation {
+  suscribeUser(userId: String!, planId: Int!): UserResponse!
 }
-
-

@@ -13,4 +13,8 @@ export class CatalogUseCases {
   getAllCatalog() {
     return this.catalogRespository.getAll()
   }
+
+  getCatalog(id: number) {
+    return this.catalogRespository.getById(id)
+  }
 }

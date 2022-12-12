@@ -15,7 +15,13 @@ export class CatalogDatabaseRepository implements CatalogRepository {
     return await this.catalogRepository.create<Catalog>(args)
   }
 
-  getById: (id: number) => Promise<ICatalog>
+  async getById(id: number): Promise<ICatalog> {
+    return await this.catalogRepository.findOne({
+      where: {
+        id,
+      },
+    })
+  }
 
   async getAll() {
     return await this.catalogRepository.findAll({
