@@ -16,6 +16,7 @@ export class UserSqlRepository implements UserRepository {
       where: {
         id,
       },
+      include: ['plan', 'documentType']
     })
 
     if (!userFound) {
