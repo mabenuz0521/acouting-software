@@ -15,8 +15,7 @@ export class FirebaseStrategy extends PassportStrategy(Strategy, 'firebase') {
         cache: true,
         rateLimit: true,
         jwksRequestsPerMinute: 5,
-        jwksUri:
-          'https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com',
+        jwksUri: process.env.JWT_URI,
       }),
       issuer,
       audience,

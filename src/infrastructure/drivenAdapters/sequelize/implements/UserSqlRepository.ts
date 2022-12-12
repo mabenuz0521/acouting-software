@@ -84,6 +84,8 @@ export class UserSqlRepository implements UserRepository {
   }
 
   async getAll() {
-    return this.userRepository.findAll()
+    return this.userRepository.findAll({
+      include: ['plan', 'documentType'],
+    })
   }
 }

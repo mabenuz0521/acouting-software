@@ -9,7 +9,6 @@ export interface IUser {
   nickname?: string
   documentTypeId?: number
   planId?: number
-  
   documentType?: ICatalog
   plan?: ICatalog
 }
