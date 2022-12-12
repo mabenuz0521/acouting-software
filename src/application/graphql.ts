@@ -28,7 +28,7 @@ export abstract class IMutation {
 
     abstract signup(userInput?: Nullable<UserInput>): Nullable<AuthTokenResponse> | Promise<Nullable<AuthTokenResponse>>;
 
-    abstract suscribeUser(userId: string, planId: number): UserResponse | Promise<UserResponse>;
+    abstract suscribeUser(planId: number): UserResponse | Promise<UserResponse>;
 
     abstract updateUser(id: string, userInput: UserInput): UserResponse | Promise<UserResponse>;
 }

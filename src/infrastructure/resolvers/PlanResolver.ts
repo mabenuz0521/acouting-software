@@ -1,4 +1,4 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql'
+import { Args, Context, Mutation, Resolver } from '@nestjs/graphql'
 import { UserResponse } from 'src/application/graphql'
 import { UserUseCases } from 'src/domain/usecase/UserUseCases'
 import { GqlAuthGuard } from '../drivenAdapters/firebase/guard/GqlAuthGuard'
@@ -6,17 +6,18 @@ import { UserPresenter } from '../presenters/userPresenter'
 import { UseGuards } from '@nestjs/common'
 
 @Resolver('Plan')
+@UseGuards(GqlAuthGuard)
 export class PlanResolver {
   constructor(private userUsesCases: UserUseCases) {}
 
   @Mutation()
-  @UseGuards(GqlAuthGuard)
   async suscribeUser(
-    @Args('userId') userId: string,
+    @Context() context,
     @Args('planId') planId: number
   ): Promise<UserResponse> {
+    const { req } = context
     return new UserPresenter(
-      await this.userUsesCases.suscribeUser(userId, planId)
+      await this.userUsesCases.suscribeUser(req['user'].user_id, planId)
     )
   }
 }

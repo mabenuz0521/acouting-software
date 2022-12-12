@@ -16,7 +16,7 @@ export class UserSqlRepository implements UserRepository {
       where: {
         id,
       },
-      include: ['plan', 'documentType']
+      include: ['plan', 'documentType'],
     })
 
     if (!userFound) {
@@ -62,6 +62,7 @@ export class UserSqlRepository implements UserRepository {
       where: {
         id: userId,
       },
+      include: ['plan', 'documentType'],
     })
     if (!userFound) {
       throw new HttpException('User not found.', HttpStatus.NOT_FOUND)
