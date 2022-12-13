@@ -5,8 +5,9 @@ import { GqlAuthGuard } from '../drivenAdapters/firebase/guard/GqlAuthGuard'
 import { UserPresenter } from '../presenters/userPresenter'
 import { UseGuards } from '@nestjs/common'
 
-@Resolver('Plan')
+
 @UseGuards(GqlAuthGuard)
+@Resolver('Plan')
 export class PlanResolver {
   constructor(private userUsesCases: UserUseCases) {}
 

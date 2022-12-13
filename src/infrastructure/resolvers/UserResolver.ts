@@ -5,32 +5,23 @@ import { UserInput, UserResponse } from '../../application/graphql'
 import { UserPresenter } from '../presenters/userPresenter'
 import { GqlAuthGuard } from '../drivenAdapters/firebase/guard/GqlAuthGuard'
 
+@UseGuards(GqlAuthGuard)
 @Resolver('User')
 export class UserResolver {
   constructor(private userUseCases: UserUseCases) {}
 
   @Query()
-  @UseGuards(GqlAuthGuard)
   async getUsers(): Promise<UserResponse[]> {
     const data = await this.userUseCases.findAll()
     return data.map((user) => new UserPresenter(user))
   }
 
   @Query()
-  @UseGuards(GqlAuthGuard)
-  greeting(@Context() context) {
-    const { req } = context
-    return `Hola ${req['user'].email}`
-  }
-
-  @Query()
-  @UseGuards(GqlAuthGuard)
   async getUser(@Args('id') id: string): Promise<UserResponse> {
     return new UserPresenter(await this.userUseCases.findUserById(id))
   }
 
   @Query()
-  @UseGuards(GqlAuthGuard)
   async getUserByEmail(@Args('email') email: string): Promise<UserResponse> {
     return new UserPresenter(await this.userUseCases.findUserByEmail(email))
   }

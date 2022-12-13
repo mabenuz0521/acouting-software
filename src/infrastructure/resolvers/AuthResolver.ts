@@ -1,4 +1,4 @@
-import { Args, Context, Mutation, Resolver, Query } from '@nestjs/graphql'
+import { Args, Mutation, Resolver, Query } from '@nestjs/graphql'
 import { AuthUseCases } from '../../domain/usecase/AuthUseCases'
 import { UserInput, AuthTokenResponse } from 'src/application/graphql'
 import { AuthPresenter } from '../presenters/AuthPresenter'
