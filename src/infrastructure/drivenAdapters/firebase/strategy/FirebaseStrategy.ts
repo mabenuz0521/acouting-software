@@ -5,6 +5,7 @@ import { DecodedIdToken } from './DecodedIdToken'
 import { FIREBASE_AUTH_CONFIG } from '../constans/constans'
 import { FirebaseAuthConfig } from '../config/FirebaseAuthConfig'
 import { passportJwtSecret } from 'jwks-rsa'
+
 @Injectable()
 export class FirebaseStrategy extends PassportStrategy(Strategy, 'firebase') {
   constructor(
