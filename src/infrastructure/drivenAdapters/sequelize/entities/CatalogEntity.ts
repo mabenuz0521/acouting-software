@@ -4,7 +4,6 @@ import {
   Table,
   DataType,
   ForeignKey,
-  BelongsTo,
   HasMany,
 } from 'sequelize-typescript'
 import { ICatalog } from 'src/domain/model/data/CatalogModel'

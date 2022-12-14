@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { AuthRepository } from '../model/data/repository/AuthRepository'
 import { IUser } from '../model/data/UserModel'
+
 @Injectable()
 export class AuthUseCases {
   constructor(private authRepository: AuthRepository) {}
