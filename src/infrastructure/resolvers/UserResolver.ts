@@ -2,7 +2,7 @@ import { Query, Resolver, Mutation, Args, Context } from '@nestjs/graphql'
 import { UserUseCases } from 'src/domain/usecase/UserUseCases'
 import { UseGuards } from '@nestjs/common'
 import { UserInput, UserResponse } from '../../application/graphql'
-import { UserPresenter } from '../presenters/userPresenter'
+import { UserPresenter } from '../presenters/UserPresenter'
 import { GqlAuthGuard } from '../drivenAdapters/firebase/guard/GqlAuthGuard'
 
 @UseGuards(GqlAuthGuard)
